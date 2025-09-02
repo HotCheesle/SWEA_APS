@@ -8,7 +8,7 @@ class Plane():
 
     def add_atom(self, x, y, dir, energy): 
         atom = Atom(x, y, dir, energy)
-        self.atom_list.append(atom)
+        self.atom_list.add(atom)
         self.atom_cnt += 1
 
     def move_half_sec(self): 
@@ -37,12 +37,13 @@ class Plane():
                 collision_point.add((atom.x, atom.y))
             else:
                 position_list.add((atom.x, atom.y))
-        for idx in range(self.atom_cnt): 
-            atom = self.atom_list[idx]
+        for atom in self.atom_list: 
             if (atom.x, atom.y) in collision_point: 
-                self.tot_energy += atom.energy
-                self.atom_list.remove(atom)
-                self.atom_cnt -= 1
+                remove_list.add(atom)
+        for rm in remove_list: 
+            self.tot_energy += rm.energy
+            self.atom_list.remove(rm)
+            self.atom_cnt -= 1
 
 class Atom(): 
     def __init__(self,x, y, direction, energy):

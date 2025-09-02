@@ -27,7 +27,7 @@ def cover_gain(i, j, N, M):
                     if city[newi][newj] == 1: 
                         house += 1
         gain = house * M - K[k]
-        if gain > 0: 
+        if gain >= 0: 
             max_house = house
     return max_house
 
